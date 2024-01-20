@@ -1,33 +1,48 @@
-import { useState } from "react"
+import { useState } from "react";
 
 function App() {
-  const [num, setNum] = useState([])
+  const [num, setNum] = useState([]);
 
   const handleClick = (e) => {
     const copyNum = [...num, e.target.textContent];
-    setNum(copyNum)
-  }
+    setNum(copyNum);
+  };
   const handleClearClick = () => {
-    setNum([])
-  }
-  
+    setNum(num.slice(0, num.length - 1));
+  };
+
   return (
     <div className="container wrapper">
       <div className="uzb_flag text_place">
-      <div className="hr">
+        <div className="hr"></div>
+        <h1 className="h1">{num}</h1>
       </div>
-      <h1 className="h1">{num}</h1>
+      <div className="clav_place">
+        <ul>
+          {[7, 8, 9, 4, 5, 6, 1, 2, 3].map((num) => {
+            return (
+              <li onClick={handleClick} key={num} className="li">
+                {num}
+              </li>
+            );
+          })}
+          <div className="btn" onClick={handleClick}>
+            0
+          </div>
+          <div onClick={handleClick} className="btn">+</div>
+          <div onClick={handleClick} className="btn">-</div>
+        </ul>
+        <div className="bnt_place">
+          <div onClick={handleClearClick} className="btn btn_del">
+            DEL
+          </div>
+          <div onClick={handleClick} className="btn">X</div>
+          <div onClick={handleClick} className="btn">/</div>
+          <div className="btn btn_teng">=</div>
+        </div>
       </div>
-      <ul>
-        {[1,2,3,4,5,6,7,8,9,0,"-"].map((num) => {
-          return <li onClick={handleClick} key={num} className="li">
-          {num}
-          </li>
-        })}
-      <button onClick={handleClearClick} className="btn">C</button>
-      </ul>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
